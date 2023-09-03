@@ -8,5 +8,6 @@ Computer Networking - Nguyen Tran Hieu/Chapter 2/Practice/SelfStudy/._NguyTheQua
 Computer Networking - Nguyen Tran Hieu/Chapter 1/Practice/._NguyTheQuang_211212120.pkt
 Visual Programming - Cao Thi Luyen/*.pdf
 Visual Programming - Cao Thi Luyen/*.docx
-# Ignore .vs folder of visual studio
+# Ignore some folder of visual studio
 .vs/
+Visual Programming - Cao Thi Luyen/BaiTapWinformCoBan/bin/Debug/
