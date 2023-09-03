@@ -23,7 +23,7 @@ namespace BaiTapWinformCoBan
 
         private void btnExit_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.Alt & e.KeyCode == Keys.H) 
+            if (e.Alt && e.KeyCode == Keys.H)
             {
                 // Display the exit confirmation dialog
                 DialogResult result = MessageBox.Show("Bạn có muốn thoát không?", "Xác nhận thoát", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
