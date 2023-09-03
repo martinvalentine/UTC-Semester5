@@ -8,13 +8,16 @@ Computer Networking - Nguyen Tran Hieu/Chapter 2/Practice/SelfStudy/._NguyTheQua
 Computer Networking - Nguyen Tran Hieu/Chapter 1/Practice/._NguyTheQuang_211212120.pkt
 Visual Programming - Cao Thi Luyen/*.pdf
 Visual Programming - Cao Thi Luyen/*.docx
+
 # Ignore some folder of visual studio
+Visual Programming - Cao Thi Luyen/BaiTapWinformCoBan/.vs/BaiTapWinformCoBan/FileContentIndex/*.vsidx
 Visual Programming - Cao Thi Luyen/BaiTapWinformCoBan/.vs
 Visual Programming - Cao Thi Luyen/BaiTapWinformCoBan/bin/Debug/
+
 # Ignore Visual Studio files
-.vs/
-obj/
-bin/
+Visual Programming - Cao Thi Luyen/BaiTapWinformCoBan/.vs/
+Visual Programming - Cao Thi Luyen/BaiTapWinformCoBan/obj/
+Visual Programming - Cao Thi Luyen/BaiTapWinformCoBan/bin/
 *.suo
 *.user
 *.sln.docstates
