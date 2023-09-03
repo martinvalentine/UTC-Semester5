@@ -45,6 +45,8 @@
             this.txtCustomerID = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.lstCustomer = new System.Windows.Forms.ListBox();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.btnExit = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -194,7 +196,7 @@
             this.groupBox2.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(327, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(546, 409);
+            this.groupBox2.Size = new System.Drawing.Size(546, 337);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Customer List";
@@ -206,8 +208,26 @@
             this.lstCustomer.ItemHeight = 15;
             this.lstCustomer.Location = new System.Drawing.Point(3, 17);
             this.lstCustomer.Name = "lstCustomer";
-            this.lstCustomer.Size = new System.Drawing.Size(540, 389);
+            this.lstCustomer.Size = new System.Drawing.Size(540, 317);
             this.lstCustomer.TabIndex = 0;
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Location = new System.Drawing.Point(488, 368);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(81, 23);
+            this.btnSearch.TabIndex = 2;
+            this.btnSearch.Text = "Search";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            // 
+            // btnExit
+            // 
+            this.btnExit.Location = new System.Drawing.Point(632, 368);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(81, 23);
+            this.btnExit.TabIndex = 2;
+            this.btnExit.Text = "Exit";
+            this.btnExit.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -216,6 +236,8 @@
             this.ClientSize = new System.Drawing.Size(885, 450);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.btnExit);
+            this.Controls.Add(this.btnSearch);
             this.Name = "Form1";
             this.Text = "Form1";
             this.groupBox1.ResumeLayout(false);
@@ -244,6 +266,8 @@
         private System.Windows.Forms.TextBox txtCustomerID;
         private System.Windows.Forms.DateTimePicker datePKElectricMeter;
         private System.Windows.Forms.ListBox lstCustomer;
+        private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.Button btnExit;
     }
 }
 
