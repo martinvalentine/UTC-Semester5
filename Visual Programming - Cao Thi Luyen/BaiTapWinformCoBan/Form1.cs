@@ -10,9 +10,15 @@ namespace BaiTapWinformCoBan
             InitializeComponent();
         }
 
-        private void btnExit_MouseClick(object sender, MouseEventArgs e)
+        private void btnExit_Click(object sender, EventArgs e)
         {
-            this.Close();
+            DialogResult result = MessageBox.Show("Bạn có muốn thoát không?", "Xác nhận thoát", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                // Thực hiện thoát ứng dụng
+                Application.Exit();
+            }
+            // Nếu người dùng chọn No, không làm gì cả, form vẫn được giữ lại.
         }
     }
 }
