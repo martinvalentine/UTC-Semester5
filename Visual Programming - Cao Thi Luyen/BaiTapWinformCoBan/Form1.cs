@@ -20,5 +20,19 @@ namespace BaiTapWinformCoBan
             }
             // Nếu người dùng chọn No, không làm gì cả, form vẫn được giữ lại.
         }
+
+        private void btnExit_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Alt & e.KeyCode == Keys.H) 
+            {
+                // Display the exit confirmation dialog
+                DialogResult result = MessageBox.Show("Bạn có muốn thoát không?", "Xác nhận thoát", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
+                {
+                    // Thực hiện thoát ứng dụng
+                    Application.Exit();
+                }
+            }
+        }
     }
 }
