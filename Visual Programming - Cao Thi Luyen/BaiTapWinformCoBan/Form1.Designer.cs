@@ -29,42 +29,42 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.datePKElectricMeter = new System.Windows.Forms.DateTimePicker();
+            this.btnAddNew = new System.Windows.Forms.Button();
+            this.btnAddtoList = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtThisMonth = new System.Windows.Forms.TextBox();
+            this.txtLastMonth = new System.Windows.Forms.TextBox();
+            this.txtCustomerAddress = new System.Windows.Forms.TextBox();
+            this.txtCustomerName = new System.Windows.Forms.TextBox();
+            this.txtCustomerID = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.lstCustomer = new System.Windows.Forms.ListBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.dateTimePicker1);
-            this.groupBox1.Controls.Add(this.button2);
-            this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.Controls.Add(this.datePKElectricMeter);
+            this.groupBox1.Controls.Add(this.btnAddNew);
+            this.groupBox1.Controls.Add(this.btnAddtoList);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.textBox5);
-            this.groupBox1.Controls.Add(this.textBox4);
-            this.groupBox1.Controls.Add(this.textBox3);
-            this.groupBox1.Controls.Add(this.textBox2);
-            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.txtThisMonth);
+            this.groupBox1.Controls.Add(this.txtLastMonth);
+            this.groupBox1.Controls.Add(this.txtCustomerAddress);
+            this.groupBox1.Controls.Add(this.txtCustomerName);
+            this.groupBox1.Controls.Add(this.txtCustomerID);
             this.groupBox1.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(13, 12);
             this.groupBox1.Name = "groupBox1";
@@ -73,31 +73,31 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Enter customer information using electric";
             // 
-            // dateTimePicker1
+            // datePKElectricMeter
             // 
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker1.Location = new System.Drawing.Point(177, 202);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(87, 21);
-            this.dateTimePicker1.TabIndex = 3;
+            this.datePKElectricMeter.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.datePKElectricMeter.Location = new System.Drawing.Point(177, 202);
+            this.datePKElectricMeter.Name = "datePKElectricMeter";
+            this.datePKElectricMeter.Size = new System.Drawing.Size(87, 21);
+            this.datePKElectricMeter.TabIndex = 3;
             // 
-            // button2
+            // btnAddNew
             // 
-            this.button2.Location = new System.Drawing.Point(152, 356);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Add New";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnAddNew.Location = new System.Drawing.Point(152, 356);
+            this.btnAddNew.Name = "btnAddNew";
+            this.btnAddNew.Size = new System.Drawing.Size(75, 23);
+            this.btnAddNew.TabIndex = 2;
+            this.btnAddNew.Text = "Add New";
+            this.btnAddNew.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // btnAddtoList
             // 
-            this.button1.Location = new System.Drawing.Point(50, 356);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(81, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Add To List";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnAddtoList.Location = new System.Drawing.Point(50, 356);
+            this.btnAddtoList.Name = "btnAddtoList";
+            this.btnAddtoList.Size = new System.Drawing.Size(81, 23);
+            this.btnAddtoList.TabIndex = 2;
+            this.btnAddtoList.Text = "Add To List";
+            this.btnAddtoList.UseVisualStyleBackColor = true;
             // 
             // label6
             // 
@@ -153,44 +153,44 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Customer ID";
             // 
-            // textBox5
+            // txtThisMonth
             // 
-            this.textBox5.Location = new System.Drawing.Point(127, 291);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(100, 21);
-            this.textBox5.TabIndex = 0;
+            this.txtThisMonth.Location = new System.Drawing.Point(127, 291);
+            this.txtThisMonth.Name = "txtThisMonth";
+            this.txtThisMonth.Size = new System.Drawing.Size(100, 21);
+            this.txtThisMonth.TabIndex = 0;
             // 
-            // textBox4
+            // txtLastMonth
             // 
-            this.textBox4.Location = new System.Drawing.Point(127, 249);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 21);
-            this.textBox4.TabIndex = 0;
+            this.txtLastMonth.Location = new System.Drawing.Point(127, 249);
+            this.txtLastMonth.Name = "txtLastMonth";
+            this.txtLastMonth.Size = new System.Drawing.Size(100, 21);
+            this.txtLastMonth.TabIndex = 0;
             // 
-            // textBox3
+            // txtCustomerAddress
             // 
-            this.textBox3.Location = new System.Drawing.Point(102, 146);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(206, 21);
-            this.textBox3.TabIndex = 0;
+            this.txtCustomerAddress.Location = new System.Drawing.Point(102, 146);
+            this.txtCustomerAddress.Name = "txtCustomerAddress";
+            this.txtCustomerAddress.Size = new System.Drawing.Size(206, 21);
+            this.txtCustomerAddress.TabIndex = 0;
             // 
-            // textBox2
+            // txtCustomerName
             // 
-            this.textBox2.Location = new System.Drawing.Point(102, 96);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(206, 21);
-            this.textBox2.TabIndex = 0;
+            this.txtCustomerName.Location = new System.Drawing.Point(102, 96);
+            this.txtCustomerName.Name = "txtCustomerName";
+            this.txtCustomerName.Size = new System.Drawing.Size(206, 21);
+            this.txtCustomerName.TabIndex = 0;
             // 
-            // textBox1
+            // txtCustomerID
             // 
-            this.textBox1.Location = new System.Drawing.Point(102, 50);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(113, 21);
-            this.textBox1.TabIndex = 0;
+            this.txtCustomerID.Location = new System.Drawing.Point(102, 50);
+            this.txtCustomerID.Name = "txtCustomerID";
+            this.txtCustomerID.Size = new System.Drawing.Size(113, 21);
+            this.txtCustomerID.TabIndex = 0;
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.listBox1);
+            this.groupBox2.Controls.Add(this.lstCustomer);
             this.groupBox2.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(327, 12);
             this.groupBox2.Name = "groupBox2";
@@ -199,15 +199,15 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Customer List";
             // 
-            // listBox1
+            // lstCustomer
             // 
-            this.listBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 15;
-            this.listBox1.Location = new System.Drawing.Point(3, 17);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(540, 389);
-            this.listBox1.TabIndex = 0;
+            this.lstCustomer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lstCustomer.FormattingEnabled = true;
+            this.lstCustomer.ItemHeight = 15;
+            this.lstCustomer.Location = new System.Drawing.Point(3, 17);
+            this.lstCustomer.Name = "lstCustomer";
+            this.lstCustomer.Size = new System.Drawing.Size(540, 389);
+            this.lstCustomer.TabIndex = 0;
             // 
             // Form1
             // 
@@ -229,21 +229,21 @@
 
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnAddNew;
+        private System.Windows.Forms.Button btnAddtoList;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.TextBox txtThisMonth;
+        private System.Windows.Forms.TextBox txtLastMonth;
+        private System.Windows.Forms.TextBox txtCustomerAddress;
+        private System.Windows.Forms.TextBox txtCustomerName;
+        private System.Windows.Forms.TextBox txtCustomerID;
+        private System.Windows.Forms.DateTimePicker datePKElectricMeter;
+        private System.Windows.Forms.ListBox lstCustomer;
     }
 }
 
