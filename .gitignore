@@ -6,3 +6,8 @@ Computer Networking - Nguyen Tran Hieu/Chapter 2/Practice/SelfStudy/._NguyTheQua
 "Computer Networking - Nguyen Tran Hieu/Chapter 1/Practice/MMT - Chu\314\233o\314\233ng 1 - VN - Thu\314\233\314\243c ha\314\200nh - Ba\314\200i ta\314\243\314\202p no\314\243\314\202p.pdf"
 "Computer Networking - Nguyen Tran Hieu/Chapter 1/Practice/MMT - Chu\314\233o\314\233ng 1 - VN - Thu\314\233\314\243c ha\314\200nh.pdf"
 # ... Add patterns for the rest of the deleted files
+# Ignore PDF and DOCX files in specific directories
+Computer Networking - Nguyen Tran Hieu/Chapter 1/*.pdf
+Computer Networking - Nguyen Tran Hieu/Chapter 1/Practice/*.pdf
+Visual Programming - Cao Thi Luyen/*.pdf
+Visual Programming - Cao Thi Luyen/*.docx
