@@ -7,8 +7,12 @@ Computer Networking - Nguyen Tran Hieu/Chapter 2/Practice/SelfStudy/*.pdf
 Computer Networking - Nguyen Tran Hieu/Chapter 2/Practice/SelfStudy/._NguyTheQuang_211212120.pkt
 Computer Networking - Nguyen Tran Hieu/Chapter 1/Practice/._NguyTheQuang_211212120.pkt
 Visual Programming - Cao Thi Luyen/*.pdf
-Visual Programming - Cao Thi Luyen/*.docx\
+Visual Programming - Cao Thi Luyen/*.docx
 # Ignore all file in .vs folder
 Visual Programming - Cao Thi Luyen/BaiTapWinformCoBan/.vs/
+Visual Programming - Cao Thi Luyen/BaiTapWinformCoBan/obj/Debug
+Visual Programming - Cao Thi Luyen/BaiTapWinformCoBan/bin/
 Visual Programming - Cao Thi Luyen/BaiTapWinformCoBan/.vs/BaiTapWinformCoBan/FileContentIndex/*.vsidx
-
+*.suo
+*.user
+*.sln.docstates
