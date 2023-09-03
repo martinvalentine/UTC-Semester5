@@ -1,13 +1,10 @@
-Computer Networking - Nguyen Tran Hieu/Chapter 2/Practice/SelfStudy/._NguyTheQuang_211212120.pkt
-# Ignore deleted files
-"Computer Networking - Nguyen Tran Hieu/Chapter 1/MMT - Chu\314\233o\314\233ng 1 - EN - An Introduction to the Computer Network.pdf"
-"Computer Networking - Nguyen Tran Hieu/Chapter 1/MMT - Chu\314\233o\314\233ng 1 - VN - To\314\202\314\211ng quan ve\314\202\314\200 Ma\314\243ng ma\314\201y ti\314\201nh.pdf"
-"Computer Networking - Nguyen Tran Hieu/Chapter 1/Practice/MMT - Chu\314\233o\314\233ng 1 - EN - Practice.pdf"
-"Computer Networking - Nguyen Tran Hieu/Chapter 1/Practice/MMT - Chu\314\233o\314\233ng 1 - VN - Thu\314\233\314\243c ha\314\200nh - Ba\314\200i ta\314\243\314\202p no\314\243\314\202p.pdf"
-"Computer Networking - Nguyen Tran Hieu/Chapter 1/Practice/MMT - Chu\314\233o\314\233ng 1 - VN - Thu\314\233\314\243c ha\314\200nh.pdf"
-# ... Add patterns for the rest of the deleted files
 # Ignore PDF and DOCX files in specific directories
 Computer Networking - Nguyen Tran Hieu/Chapter 1/*.pdf
+Computer Networking - Nguyen Tran Hieu/Chapter 2/*.pdf
 Computer Networking - Nguyen Tran Hieu/Chapter 1/Practice/*.pdf
+Computer Networking - Nguyen Tran Hieu/Chapter 2/Practice/*.pdf
+Computer Networking - Nguyen Tran Hieu/Chapter 2/Practice/SelfStudy/*.pdf
+Computer Networking - Nguyen Tran Hieu/Chapter 2/Practice/SelfStudy/._NguyTheQuang_211212120.pkt
+Computer Networking - Nguyen Tran Hieu/Chapter 1/Practice/._NguyTheQuang_211212120.pkt
 Visual Programming - Cao Thi Luyen/*.pdf
 Visual Programming - Cao Thi Luyen/*.docx
