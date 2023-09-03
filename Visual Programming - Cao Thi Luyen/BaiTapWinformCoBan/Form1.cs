@@ -21,7 +21,7 @@ namespace BaiTapWinformCoBan
             // Nếu người dùng chọn No, không làm gì cả, form vẫn được giữ lại.
         }
 
-        private void btnExit_KeyDown(object sender, KeyEventArgs e)
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Alt && e.KeyCode == Keys.H)
             {
