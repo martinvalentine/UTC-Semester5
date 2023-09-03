@@ -11,3 +11,10 @@ Visual Programming - Cao Thi Luyen/*.docx
 # Ignore some folder of visual studio
 Visual Programming - Cao Thi Luyen/BaiTapWinformCoBan/.vs
 Visual Programming - Cao Thi Luyen/BaiTapWinformCoBan/bin/Debug/
+# Ignore Visual Studio files
+.vs/
+obj/
+bin/
+*.suo
+*.user
+*.sln.docstates
