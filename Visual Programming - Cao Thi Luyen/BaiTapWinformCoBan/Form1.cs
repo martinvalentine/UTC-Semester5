@@ -10,5 +10,9 @@ namespace BaiTapWinformCoBan
             InitializeComponent();
         }
 
+        private void btnExit_MouseClick(object sender, MouseEventArgs e)
+        {
+            this.Close();
+        }
     }
 }
