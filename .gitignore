@@ -9,16 +9,12 @@ Computer Networking - Nguyen Tran Hieu/Chapter 1/Practice/._NguyTheQuang_2112121
 Visual Programming - Cao Thi Luyen/*.pdf
 Visual Programming - Cao Thi Luyen/*.docx
 
-# Ignore some folder of visual studio
-Visual Programming - Cao Thi Luyen/BaiTapWinformCoBan/.vs/BaiTapWinformCoBan/FileContentIndex/*.vsidx
-Visual Programming - Cao Thi Luyen/BaiTapWinformCoBan/.vs
-Visual Programming - Cao Thi Luyen/BaiTapWinformCoBan/bin/Debug/
-
 # Ignore Visual Studio files
-Visual Programming - Cao Thi Luyen/BaiTapWinformCoBan/.vs/
-Visual Programming - Cao Thi Luyen/BaiTapWinformCoBan/obj/
-Visual Programming - Cao Thi Luyen/BaiTapWinformCoBan/bin/
+.vs/
+Visual Programming - Cao Thi Luyen/BaiTapWinformCoBan/.vs/BaiTapWinformCoBan/FileContentIndex/*.vsidx
+obj/
+bin/
+bin/Debug/
 *.suo
 *.user
 *.sln.docstates
-.vs/
