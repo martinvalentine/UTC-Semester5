@@ -18,3 +18,4 @@ bin/
 *.suo
 *.user
 *.sln.docstates
+*csproj
