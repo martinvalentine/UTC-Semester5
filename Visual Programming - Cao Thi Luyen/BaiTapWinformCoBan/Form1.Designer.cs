@@ -91,6 +91,7 @@
             this.btnAddNew.TabIndex = 2;
             this.btnAddNew.Text = "Add New";
             this.btnAddNew.UseVisualStyleBackColor = true;
+            this.btnAddNew.Click += new System.EventHandler(this.btnAddNew_Click);
             // 
             // btnAddtoList
             // 
@@ -100,6 +101,7 @@
             this.btnAddtoList.TabIndex = 2;
             this.btnAddtoList.Text = "Add To List";
             this.btnAddtoList.UseVisualStyleBackColor = true;
+            this.btnAddtoList.Click += new System.EventHandler(this.btnAddtoList_Click);
             // 
             // label6
             // 
