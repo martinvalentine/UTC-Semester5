@@ -28,6 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
+            "Ma 1",
+            "Giay",
+            "1000"}, -1);
             this.txtProductID = new System.Windows.Forms.TextBox();
             this.txtQuantity = new System.Windows.Forms.TextBox();
             this.txtProductName = new System.Windows.Forms.TextBox();
@@ -99,6 +103,9 @@
             this.columnHeader3});
             this.listView1.GridLines = true;
             this.listView1.HideSelection = false;
+            listViewItem1.StateImageIndex = 0;
+            this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem1});
             this.listView1.Location = new System.Drawing.Point(37, 41);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(483, 327);

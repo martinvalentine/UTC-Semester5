@@ -12,9 +12,11 @@ namespace ListView_Example
 {
     public partial class Form1 : Form
     {
+        List<Product> ds = new List<Product>();
         public Form1()
         {
             InitializeComponent();
         }
+
     }
 }
