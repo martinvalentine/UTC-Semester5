@@ -4,8 +4,6 @@ Computer Networking - Nguyen Tran Hieu/Chapter 2/*.pdf
 Computer Networking - Nguyen Tran Hieu/Chapter 1/Practice/*.pdf
 Computer Networking - Nguyen Tran Hieu/Chapter 2/Practice/*.pdf
 Computer Networking - Nguyen Tran Hieu/Chapter 2/Practice/SelfStudy/*.pdf
-Computer Networking - Nguyen Tran Hieu/Chapter 2/Practice/SelfStudy/._NguyTheQuang_211212120.pkt
-Computer Networking - Nguyen Tran Hieu/Chapter 1/Practice/._NguyTheQuang_211212120.pkt
 Visual Programming - Cao Thi Luyen/*.pdf
 Visual Programming - Cao Thi Luyen/*.docx
 
@@ -18,4 +16,3 @@ bin/
 *.suo
 *.user
 *.sln.docstates
-*.csproj
