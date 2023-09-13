@@ -6,7 +6,7 @@ Use Razor to present the student list to the View
 *@
 
 <a asp-action="Create" class="btn btn-primary">Create Student</a>
-<table class="tab table-striped">
+<table class="table table-striped">
     <thead>
         <tr>
             <th>Mã</th>
@@ -44,7 +44,7 @@ Use Razor to present the student list to the View
                             break;
                     }
                 }
-                <td>@str</td> //Print the major in switch-case
+                <td>@str</td> @* Print the major in switch-case *@
                 <td>@(s.Gender == Gender.Male ? "Nam" : "Nữ")</td>
                 <td>@(s.IsRegular ? "Chính quy": "Phi chính quy")</td>
                 <td>@s.Address</td>
