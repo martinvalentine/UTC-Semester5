@@ -20,7 +20,7 @@ namespace StudentManagementWeb.Controllers
                 Address = "A1-2018", Email = "marclevy@g.com" },
 
                 new Student() { Id = 102, Name = "Justin Bieber", Branch = Branch.BE,
-                Gender = Gender.Female, IsRegular=true,
+                Gender = Gender.Male, IsRegular=true,
                 Address = "A1-2019", Email = "JBieber@g.com" },
 
                 new Student() { Id = 103, Name = "Kendrick Lamar", Branch = Branch.CE,
