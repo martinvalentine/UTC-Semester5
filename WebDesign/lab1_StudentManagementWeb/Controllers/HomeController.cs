@@ -12,7 +12,6 @@ namespace lab1_StudentManagementWeb.Controllers
         {
             _logger = logger;
         }
-
         public IActionResult Index()
         {
             return View();
