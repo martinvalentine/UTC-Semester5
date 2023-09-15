@@ -7,12 +7,4 @@ Computer Networking - Nguyen Tran Hieu/Chapter 2/Practice/SelfStudy/*.pdf
 Visual Programming - Cao Thi Luyen/*.pdf
 Visual Programming - Cao Thi Luyen/*.docx
 
-# Ignore Visual Studio files
-.vs/
-Visual Programming - Cao Thi Luyen/BaiTapWinformCoBan/.vs/BaiTapWinformCoBan/FileContentIndex/*.vsidx
-obj/
-bin/Debug/
-bin/
-*.suo
-*.user
-*.sln.docstates
+# Ignore some files in Visual Studio
