@@ -33,13 +33,15 @@ namespace StudentManagementWeb.Controllers
             };
         }
 
+        [HttpGet("Admin/Student/List")]
         public IActionResult Index()
         {
             // Returns View Index.cshtml with Model as a list of sv listStudents
             return View(listStudents);
         }
 
-        [HttpGet]
+        [Route("Admin/Student/Add")]
+        [HttpGet("Admin/Student/Add")]
         public IActionResult Create()
         {
             //lấy danh sách các giá trị Gender để hiển thị radio button trên form
@@ -56,7 +58,8 @@ namespace StudentManagementWeb.Controllers
             };
             return View();
         }
-        [HttpPost]
+
+        [HttpPost("Admin/Student/Add")]
         public IActionResult Create(Student s)
         {
             s.Id = listStudents.Last<Student>().Id + 1;
