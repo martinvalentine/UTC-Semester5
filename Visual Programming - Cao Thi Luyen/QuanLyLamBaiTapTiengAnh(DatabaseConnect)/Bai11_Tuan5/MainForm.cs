@@ -23,7 +23,7 @@ namespace Bai11_Tuan5
         {
             tenBai = bài1ToolStripMenuItem.Text;
             dangBai = dạngBàiĐiềnTừToolStripMenuItem.Text;
-            Form1 f = new Form1(@"E:\Documents\UTC\BT1\Content.txt", @"E:\Documents\UTC\BT1\ContentAnswers.txt", @"E:\Documents\UTC\BT1\Answers.txt",tenBai,dangBai);
+            Form1 f = new Form1(@"E:\Documents\UTC\SEMESTER 5\Visual Programming - Cao Thi Luyen\QuanLyLamBaiTapTiengAnh(DatabaseConnect)\Source\BT1\Content.txt", @"E:\Documents\UTC\SEMESTER 5\Visual Programming - Cao Thi Luyen\QuanLyLamBaiTapTiengAnh(DatabaseConnect)\Source\BT1\ContentAnswers.txt", @"E:\Documents\UTC\SEMESTER 5\Visual Programming - Cao Thi Luyen\QuanLyLamBaiTapTiengAnh(DatabaseConnect)\Source\BT1\Answers.txt", tenBai,dangBai);
             f.ShowDialog();
         }
 
@@ -31,7 +31,7 @@ namespace Bai11_Tuan5
         {
             tenBai = bài2ToolStripMenuItem.Text;
             dangBai = dạngBàiĐiềnTừToolStripMenuItem.Text;
-            Form1 f = new Form1(@"E:\Documents\UTC\BT1\Content.txt", @"E:\Documents\UTC\BT1\ContentAnswers.txt", @"E:\Documents\UTC\BT1\Answers.txt",tenBai,dangBai);
+            Form1 f = new Form1(@"E:\Documents\UTC\SEMESTER 5\Visual Programming - Cao Thi Luyen\QuanLyLamBaiTapTiengAnh(DatabaseConnect)\Source\BT1\Content.txt", @"E:\Documents\UTC\SEMESTER 5\Visual Programming - Cao Thi Luyen\QuanLyLamBaiTapTiengAnh(DatabaseConnect)\Source\BT1\ContentAnswers.txt", @"E:\Documents\UTC\SEMESTER 5\Visual Programming - Cao Thi Luyen\QuanLyLamBaiTapTiengAnh(DatabaseConnect)\Source\BT1\Answers.txt", tenBai,dangBai);
             f.ShowDialog();
 
         }
