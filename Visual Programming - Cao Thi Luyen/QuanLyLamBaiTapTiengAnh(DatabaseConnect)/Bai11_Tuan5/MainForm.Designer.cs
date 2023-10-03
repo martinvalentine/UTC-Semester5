@@ -55,7 +55,7 @@
             this.menuStrip2.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.menuStrip2.Location = new System.Drawing.Point(0, 0);
             this.menuStrip2.Name = "menuStrip2";
-            this.menuStrip2.Size = new System.Drawing.Size(464, 24);
+            this.menuStrip2.Size = new System.Drawing.Size(488, 24);
             this.menuStrip2.TabIndex = 1;
             this.menuStrip2.Text = "menuStrip";
             // 
@@ -110,7 +110,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(464, 275);
+            this.ClientSize = new System.Drawing.Size(488, 283);
             this.Controls.Add(this.menuStrip2);
             this.Name = "MainForm";
             this.Text = "MainForm";
