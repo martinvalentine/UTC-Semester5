@@ -517,6 +517,7 @@ GROUP BY
 -- 45.   Đổi tên "NXB Thăng Long" thành "NXB Văn học
 -- 46.   Đưa ra thông tin toàn bộ sách, nếu sách được bán trong năm 2014 thì đưa ra SL bán
 
+<<<<<<< HEAD
 -- **********Hết********** --
 -- Bài tập Thủ tục --
 
@@ -715,3 +716,114 @@ DECLARE @sach INT, @tien MONEY
 EXEC Cau11 'KH01','2014',@sach OUTPUT, @tien OUTPUT
 PRINT 'So luong hoa don da mua :' + CONVERT(NVARCHAR(50), @sach)
 PRINT 'Luong tien tieu dung:' + CONVERT(NVARCHAR(50), @tien)
+=======
+
+-- Hết --
+-- Hàm --
+-- 1. Tạo hàm đưa ra tổng số tiền đã nhập sách trong một năm với tham số đầu vào là năm
+-- 2. Tạo hàm đưa ra danh sách 5 đầu sách bán chạy nhất trong tháng nào đó (tháng là tham số đầu vào)
+-- 3. Tạo hàm đưa ra danh sách n nhân viên có doanh thu cao nhất trong một năm với n và năm là tham số đầu vào
+-- 4. Tạo hàm đưa ra thông tin Nhân viên sinh nhật trong ngày là tham số nhập vào
+-- 5. Tạo hàm đưa ra danh sách tồn trong kho quá 2 năm (nhập nhưng không bán hết trong hai năm)
+-- 6. Tạo hàm với đầu vào là ngày, đầu ra là thông tin các hóa đơn và trị giá của hóa đơn trong ngày đó
+GO
+CREATE FUNCTION TriGiaHoaDonTrongNgay
+(
+    @date DATE
+)
+RETURNS TABLE
+AS
+RETURN
+(
+    SELECT 
+		tHoaDonBan.SoHDB,
+		SUM(tSach.DonGiaBan * tChiTietHDB.SLBan) as Tong
+    FROM
+    tChiTietHDB
+	INNER JOIN
+    tHoaDonBan ON tHoaDonBan.SoHDB = tChiTietHDB.SoHDB 
+	INNER JOIN
+    tSach ON tSach.MaSach = tChiTietHDB.MaSach
+    WHERE tHoaDonBan.NgayBan = @date
+	GROUP BY tHoaDonBan.SoHDB
+);
+
+SELECT * FROM TriGiaHoaDonTrongNgay('2014-08-11')
+
+-- 7. Tạo hàm có đầu vào là năm đầu ra là thống kê doanh thu theo từng tháng và cả năm (dùng roll up)
+-- 8. Tạo hàm có đầu vào là sách, đầu ra là số lượng tồn của sách
+-- 9. Tạo hàm có đầu vào là mã loại, đầu ra là thông tin sách, số lượng sách nhập, số lượng sách bán của mỗi sách thuộc mã loại đó
+GO
+
+ALTER FUNCTION dbo.GetBookInfoByCategory
+(
+    @categoryCode NVARCHAR(10)
+)
+RETURNS TABLE
+AS
+RETURN
+(
+    SELECT
+        tSach.MaSach,
+        b.TenSach,
+        tSach.MaTheLoai,
+        tSach.MaNXB,
+        ISNULL(SUM(ctHDN.SLNhap), 0) AS SoLuongNhap,
+        ISNULL(SUM(ctHDB.SLBan), 0) AS SoLuongBan
+    FROM tSach
+    LEFT JOIN tChiTietHDN ctHDN ON tSach.MaSach = ctHDN.MaSach
+    LEFT JOIN tChiTietHDB ctHDB ON tSach.MaSach = ctHDB.MaSach
+    LEFT JOIN (
+        SELECT DISTINCT MaSach, TenSach FROM tSach
+    ) b ON tSach.MaSach = b.MaSach
+    WHERE tSach.MaTheLoai = @categoryCode
+    GROUP BY tSach.MaSach, b.TenSach, tSach.MaTheLoai, tSach.MaNXB
+);
+
+
+SELECT * FROM GetBookInfoByCategory('TL01')
+
+-- Hết --
+-- Thủ tục --
+
+-- 1. Tạo thủ tục có đầu vào là mã sách, đầu ra là số lượng sách đó được bán trong năm 2014
+GO
+CREATE PROCEDURE GetBooksSoldInYear
+(
+    @MaSach NVARCHAR(10),
+    @Year INT
+)
+AS
+BEGIN
+    SELECT 
+        @MaSach AS 'MaSach',
+        COUNT(tChiTietHDB.SLBan) AS 'SoLuongBan2014'
+    FROM 
+        tChiTietHDB
+    INNER JOIN 
+        tHoaDonBan ON tChiTietHDB.SoHDB = tHoaDonBan.SoHDB
+    WHERE 
+        tChiTietHDB.MaSach = @MaSach
+        AND YEAR(tHoaDonBan.NgayBan) = @Year;
+END
+
+EXEC GetBooksSoldInYear 'S01', 2014;
+
+
+2. Tạo thủ tục có đầu vào là ngày, đầy ra là số lượng hóa đơn và số lượng tiền bán của sách
+trong ngày đó
+3. Tạo thủ tục có đầu vào là mã nhà cung cấp, đầu ra là số đầu sách và số tiền cửa hàng đã
+nhập của nhà cung cấp đó
+4.Tạo thủ tục có đầu vào là năm, đầu ra là số tiền nhập hàng, số tiền bán hàng của năm đó.
+5. Tạo thủ tục có đầu vào là mã NXB, đầu ra là số lượng sách tồn của nhà xuất bản đó
+6.Tạo thủ tục nhập dữ liệu cho bảng hóa đơn nhập và chi tiết hóa đơn nhập cùng lúc (sử dụng
+transaction)
+7.Tạo thủ tục xóa đồng thời hóa đơn bán và chi tiết hóa đơn bán (dùng transaction)
+8.Tạo thủ tục có đầu vào là năm, đầu ra là số lượng sách nhập, sách bán của năm đó
+9. Tạo thủ tục có đầu vào là mã sách, năm, đầu ra số lượng sách nhập, số lượng sách bán
+trong năm đó
+10. Tạo thủ tục có đầu vào là mã khách hàng, năm, đầu ra là số lượng sách đã mua và số
+lượng tiền tiêu dùng của khách hàng đó trong năm nhập vào.
+11.Tạo thủ tục có đầu vào là mã khách hàng, năm, đầu ra là số lượng hóa đơn đã mua và số
+lượng tiền tiêu dùng của khách hàng đó trong năm đó.
+>>>>>>> 82ad5f6605164a249d14a6a6a3d45ac372acf461
