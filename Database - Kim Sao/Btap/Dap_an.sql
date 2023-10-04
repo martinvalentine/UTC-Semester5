@@ -716,7 +716,6 @@ DECLARE @sach INT, @tien MONEY
 EXEC Cau11 'KH01','2014',@sach OUTPUT, @tien OUTPUT
 PRINT 'So luong hoa don da mua :' + CONVERT(NVARCHAR(50), @sach)
 PRINT 'Luong tien tieu dung:' + CONVERT(NVARCHAR(50), @tien)
-=======
 
 -- Hết --
 -- Hàm --
