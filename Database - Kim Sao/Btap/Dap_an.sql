@@ -516,3 +516,202 @@ GROUP BY
 -- 44.   Xóa những hóa đơn do nhân viên "Trần Huy" lập (lưu ý xóa chi tiết hóa đơn trước)
 -- 45.   Đổi tên "NXB Thăng Long" thành "NXB Văn học
 -- 46.   Đưa ra thông tin toàn bộ sách, nếu sách được bán trong năm 2014 thì đưa ra SL bán
+
+-- **********Hết********** --
+-- Bài tập Thủ tục --
+
+-- 1. Tạo thủ tục có đầu vào là mã sách, đầu ra là số lượng sách đó được bán trong năm 2014
+GO
+CREATE PROCEDURE Cau1
+	@masach NVARCHAR(10),
+	@soluong INT OUTPUT
+AS
+BEGIN
+	SELECT
+		@soluong = SUM(tChiTietHDB.SLBan) 
+					FROM tChiTietHDB 
+						INNER JOIN tHoaDonBan ON tHoaDonBan.SoHDB = tChiTietHDB.SoHDB
+					WHERE YEAR(tHoaDonBan.NgayBan) = 2014 AND tChiTietHDB.MaSach = @masach
+END
+
+DECLARE @soluongban INT
+EXEC Cau1 'S01', @soluongban OUTPUT
+PRINT @soluongban
+
+-- 2. Tạo thủ tục có đầu vào là ngày, đầy ra là số lượng hóa đơn và số lượng tiền bán của sách trong ngày đó
+GO
+CREATE PROCEDURE Cau2
+		@ngay DATETIME,
+		@SLhoadon INT OUTPUT,
+		@SLtienban MONEY OUTPUT
+AS
+BEGIN
+	SELECT 
+		@SLhoadon = COUNT (tChiTietHDB.SoHDB),
+		@SLtienban = SUM(tChiTietHDB.SLBan*tSach.DonGiaBan)
+	FROM tChiTietHDB 
+		INNER JOIN tHoaDonBan ON tHoaDonBan.SoHDB = tChiTietHDB.SoHDB
+		INNER JOIN tSach ON tSach.MaSach = tChiTietHDB.MaSach
+	WHERE tHoaDonBan.NgayBan = @ngay
+END
+
+DECLARE @SLB INT, @TIENBAN MONEY
+EXEC Cau2 '2014-07-10', @SLB OUTPUT, @TIENBAN OUTPUT
+PRINT 'So luong ban la: ' + CONVERT(NVARCHAR(20), @SLB)
+PRINT 'Tong so tien ban duoc trong ngay: ' + CONVERT(NVARCHAR(20), @TIENBAN)
+
+-- 3. Tạo thủ tục có đầu vào là mã nhà cung cấp, đầu ra là số đầu sách và số tiền cửa hàng đã nhập của nhà cung cấp đó
+GO
+ALTER PROCEDURE Cau3
+	@maNcc NVARCHAR(10),
+	@SLDauSach INT OUTPUT,
+	@SoTienDaNhap MONEY OUTPUT
+AS
+BEGIN
+	SELECT 
+		@SLDauSach = COUNT(tChiTietHDN.MaSach),
+		@SoTienDaNhap = SUM (tChiTietHDN.SLNhap*tSach.DonGiaNhap)
+	FROM
+		tChiTietHDN
+		INNER JOIN tHoaDonNhap ON tHoaDonNhap.SoHDN = tChiTietHDN.SoHDN
+		INNER JOIN tSach ON tSach.MaSach = tChiTietHDN.MaSach
+	WHERE tHoaDonNhap.MaNCC = @maNcc 
+END
+
+DECLARE @SLDSACH INT, @TIENNHAP MONEY
+EXEC Cau3 'NCC01', @SLDSACH OUTPUT, @TIENNHAP OUTPUT
+PRINT 'So luong dau sach da nhap la: ' + CONVERT(NVARCHAR(50), @SLDSACH)
+PRINT 'Tong so tien da nhap la: ' + CONVERT(NVARCHAR(50), @TIENNHAP)
+
+-- 4.Tạo thủ tục có đầu vào là năm, đầu ra là số tiền nhập hàng, số tiền bán hàng của năm đó.
+GO
+CREATE PROCEDURE Cau4 
+	@nam INT,
+	@tienNhapHang MONEY OUTPUT,
+	@tienBanHangCuaNam MONEY OUTPUT
+AS 
+BEGIN
+	SELECT 
+		@tienNhapHang = SUM (tChiTietHDN.SLNhap*tSach.DonGiaNhap),
+		@tienBanHangCuaNam = SUM (tChiTietHDB.SLBan*tSach.DonGiaBan)
+	FROM
+		tChiTietHDN
+		INNER JOIN tHoaDonNhap ON tHoaDonNhap.SoHDN = tChiTietHDN.SoHDN
+		INNER JOIN tSach ON tSach.MaSach = tChiTietHDN.MaSach
+		INNER JOIN tChiTietHDB ON tChiTietHDB.MaSach = tSach.MaSach
+		INNER JOIN tHoaDonBan ON tHoaDonBan.SoHDB = tChiTietHDB.SoHDB
+	WHERE YEAR(tHoaDonBan.NgayBan) = @nam
+		AND YEAR(tHoaDonNhap.NgayNhap) = @nam
+END
+	
+DECLARE
+	@TIENNHAP MONEY,
+	@TIENBAN MONEY
+EXEC Cau4 2014, @TIENNHAP OUTPUT, @TIENBAN OUTPUT
+PRINT 'Tien nhap la: ' + CONVERT(NVARCHAR(50), @TIENNHAP)
+PRINT 'Tien ban la: ' + CONVERT(NVARCHAR(50), @TIENBAN)
+
+
+-- 5. Tạo thủ tục có đầu vào là mã NXB, đầu ra là số lượng sách tồn của nhà xuất bản đó
+-- 6.Tạo thủ tục nhập dữ liệu cho bảng hóa đơn nhập và chi tiết hóa đơn nhập cùng lúc (sử dụng transaction)
+GO
+CREATE PROCEDURE Cau6
+	@SoHDN NVARCHAR(10),
+    @MaNV NVARCHAR(10),
+    @NgayNhap DATETIME,
+    @MaNCC NVARCHAR(10),
+    @MaSach NVARCHAR(10),
+    @SLNhap INT,
+    @KhuyenMai NVARCHAR(100)
+AS
+BEGIN
+	BEGIN TRANSACTION
+		-- Insert data into tHoaDonNhap table
+		INSERT INTO tHoaDonNhap (SoHDN, MaNV, NgayNhap, MaNCC)
+		VALUES (@SoHDN, @MaNV, @NgayNhap, @MaNCC)
+
+		-- Insert data into tChiTietHDN table
+		INSERT INTO tChiTietHDN (SoHDN, MaSach, SLNhap, KhuyenMai)
+		VALUES (@SoHDN, @MaSach, @SLNhap, @KhuyenMai)
+		 
+		-- Commit the transaction
+		COMMIT TRANSACTION
+
+    -- Print a success message
+    PRINT 'Du lieu tHoaDonNhap and tChiTietHDN.'
+END
+
+-- Setting KhuyenMai to 0
+EXEC Cau6  
+    @SoHDN = 'HDN006',
+    @MaNV = 'NV06',
+    @NgayNhap = '2023-09-08',
+    @MaNCC = 'NCC04',
+    @MaSach = 'S01',
+    @SLNhap = 5,
+    @KhuyenMai = 0;
+
+-- Check inserted hoa don nhap
+SELECT *
+FROM tChiTietHDN
+WHERE SoHDN = 'HDN006';
+
+-- 7.Tạo thủ tục xóa đồng thời hóa đơn bán và chi tiết hóa đơn bán (dùng transaction)
+GO
+ALTER PROCEDURE Cau7
+    @SoHDB nvarchar(10)
+AS
+BEGIN
+    SET NOCOUNT ON
+
+    -- Begin the transaction
+    BEGIN TRANSACTION
+
+    -- Delete details associated with the sales invoice
+    DELETE FROM tChiTietHDB
+    WHERE SoHDB = @SoHDB
+
+    -- Delete the sales invoice
+    DELETE FROM tHoaDonBan
+    WHERE SoHDB = @SoHDB
+
+    -- Commit the transaction if all steps are successful
+    COMMIT TRANSACTION
+
+    -- Print a success message
+    PRINT 'Hoa don nhap va thong tin ' + CONVERT(NVARCHAR(10),@SoHDB) + ' hoa don nhap da bi xoa'
+END
+
+-- Thuc hien xoa
+EXEC Cau7 'HDB03'
+
+-- Kiem tra sau khi da xoa
+SELECT *
+FROM tChiTietHDB
+WHERE SoHDB = 'HDB03'
+
+-- 8.Tạo thủ tục có đầu vào là năm, đầu ra là số lượng sách nhập, sách bán của năm đó
+-- 9. Tạo thủ tục có đầu vào là mã sách, năm, đầu ra số lượng sách nhập, số lượng sách bán trong năm đó
+-- 10. Tạo thủ tục có đầu vào là mã khách hàng, năm, đầu ra là số lượng sách đã mua và số lượng tiền tiêu dùng của khách hàng đó trong năm nhập vào.
+-- 11.Tạo thủ tục có đầu vào là mã khách hàng, năm, đầu ra là số lượng hóa đơn đã mua và số lượng tiền tiêu dùng của khách hàng đó trong năm đó.
+GO
+CREATE PROCEDURE Cau11
+	@makh NVARCHAR(10),
+	@year INT,
+	@sl INT OUTPUT,
+	@money MONEY OUT
+AS BEGIN
+	SELECT DISTINCT 
+		@sl = COUNT (tChiTietHDB.SoHDB),
+		@money = SUM (tSach.DonGiaBan* tChiTietHDB.SLBan)
+	FROM tChiTietHDB
+		INNER JOIN tHoaDonBan ON tHoaDonBan.SoHDB = tChiTietHDB.SoHDB
+		INNER JOIN tSach ON tSach.MaSach = tChiTietHDB.MaSach
+	WHERE YEAR(tHoaDonBan.NgayBan) = @year
+		AND tHoaDonBan.MaKH = @makh
+END
+
+DECLARE @sach INT, @tien MONEY
+EXEC Cau11 'KH01','2014',@sach OUTPUT, @tien OUTPUT
+PRINT 'So luong hoa don da mua :' + CONVERT(NVARCHAR(50), @sach)
+PRINT 'Luong tien tieu dung:' + CONVERT(NVARCHAR(50), @tien)
