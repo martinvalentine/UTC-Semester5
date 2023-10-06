@@ -517,7 +517,6 @@ GROUP BY
 -- 45.   Đổi tên "NXB Thăng Long" thành "NXB Văn học
 -- 46.   Đưa ra thông tin toàn bộ sách, nếu sách được bán trong năm 2014 thì đưa ra SL bán
 
-<<<<<<< HEAD
 -- **********Hết********** --
 -- Bài tập Thủ tục --
 
@@ -692,6 +691,27 @@ FROM tChiTietHDB
 WHERE SoHDB = 'HDB03'
 
 -- 8.Tạo thủ tục có đầu vào là năm, đầu ra là số lượng sách nhập, sách bán của năm đó
+GO
+CREATE PROCEDURE Cau8
+	@nam INT,
+	@SLSachNhap INT OUTPUT,
+	@SLsachBan INT OUTPUT
+AS 
+BEGIN
+	SELECT 
+		@SLsachBan = SUM (tChiTietHDN.SLNhap),
+		@SLsachBan = SUM (tChiTietHDB.SLBan)
+	FROM
+		tHoaDonNhap
+		INNER JOIN tChiTietHDN ON tChiTietHDN.SoHDN = tHoaDonNhap.SoHDN
+		INNER JOIN tSach ON tSach.MaSach = tChiTietHDN.MaSach
+		INNER JOIN tChiTietHDB ON tChiTietHDB.MaSach = tSach.MaSach
+		INNER JOIN tHoaDonBan ON tHoaDonBan.SoHDB = tChiTietHDB.SoHDB
+	WHERE YEAR(tHoaDonNhap.NgayNhap) = @nam AND YEAR(tHoaDonBan.NgayBan) = @nam
+END
+
+
+
 -- 9. Tạo thủ tục có đầu vào là mã sách, năm, đầu ra số lượng sách nhập, số lượng sách bán trong năm đó
 -- 10. Tạo thủ tục có đầu vào là mã khách hàng, năm, đầu ra là số lượng sách đã mua và số lượng tiền tiêu dùng của khách hàng đó trong năm nhập vào.
 -- 11.Tạo thủ tục có đầu vào là mã khách hàng, năm, đầu ra là số lượng hóa đơn đã mua và số lượng tiền tiêu dùng của khách hàng đó trong năm đó.
@@ -783,3 +803,61 @@ RETURN
 SELECT * FROM GetBookInfoByCategory('TL01')
 
 -- Hết --
+-- Trigger --
+
+-- Ví dụ:
+CREATE TRIGGER ThanhTien ON [dbo].[tChiTietHDB]
+FOR INSERT, UPDATE
+AS
+BEGIN
+	DECLARE 
+		@sodhdb NVARCHAR(10),
+		@dongia MONEY,
+		@thanh MONEY,
+		@masach NVARCHAR(10)
+	SELECT
+		@sodhdb = sohdb,
+		@masach = masach
+	FROM inserted
+	SELECT
+		@dongia = dongiaban
+	FROM
+		tSach
+	WHERE
+		MaSach = @masach
+
+	UPDATE
+		tChiTietHDB
+	SET
+		ThanhTien = SLBan * @dongia
+	WHERE
+		SoHDB = @sodhdb AND MaSach = @masach
+END
+
+INSERT INTO tChiTietHDB(SoHDB, MaSach, SLBan)
+	VALUES ('HDB01', 'S03', 10)
+
+INSERT INTO tChiTietHDB(SoHDB, MaSach, SLBan)
+	VALUES ('HDB01', 'S05', 10)
+
+-- VD2: Thêm trường tổng tiền vào hoá đơn bán tHoaDonBan, tạo trigger cập nhật tự động
+	-- Cách làm: tổng tiền hoá đơn thay đổi khi thay đổi SL bán, thêm một sản phẩm khác mà các thay đổi này thuộc bảng tChiTietHoaDon nên phải viết trigger trên đây
+	-- Khi làm việc với trigger thì chỉ làm việc với cái table mà mình đang sử dụng vì nếu thế sẽ làm cho sever quá tải
+
+
+
+-- 1. Tạo trường thành tiền (ThanhTien) cho bảng tChitietHDB, tạo trigger cập nhật tự động cho trường này biết ThanhTien=SLBan*DonGiaBan
+-- 2. Thêm trường đơn giá (DonGia) cho bảng chi tiết hóa đơn bán, cập nhật dữ liệu cho trường này mỗi khi thêm, sửa bản ghi vào bảng chi tiết hóa đơn bán.
+-- 3. Thêm trường số lượng hóa đơn vào bảng khách hàng và cập nhật tự động cho trường này mỗi khi thêm hóa đơn
+-- 4. Thêm trường số sản phẩm vào bảng hóa đơn bán, cập nhật tự động cho trường này mỗi khithêm chi tiết hóa đơn
+-- 5.Thêm trường số sản phẩm vào bảng hóa đơn bán, cập nhật tự động cho trường này mỗi khi xóa chi tiết hóa đơn
+-- 6.Thêm trường số sản phẩm vào bảng hóa đơn bán, cập nhật tự động cho trường này mỗi khi thêm, sửa, xóa chi tiết hóa đơn
+-- 7. Thêm trường tổng tiền cho hóa đơn bán, cập nhật tự động cho trường này mỗi khi thêm chi tiết hóa đơn
+-- 8. Thêm trường số lượng hóa đơn vào bảng khách hàng và cập nhật tự động cho trường này mỗi khi thêm, sửa, xóa hóa đơn
+-- 9. Thêm trường số sản phẩm vào bảng hóa đơn bán, cập nhật tự động cho trường này mỗi khi thêm, xóa, sửa chi tiết hóa đơn
+-- 10. Thêm trường tổng tiền cho hóa đơn bán, cập nhật tự động cho trường này mỗi khi thêm, xóa, sửa chi tiết hóa đơn
+-- 11. Số lượng trong bảng Sách là số lượng tồn kho, cập nhật tự động dữ liệu cho trường này mỗi khi nhập hay bán sách
+-- 12. Thêm trường Tổng tiền tiêu dùng cho bảng khách hàng, cập nhật thông tin cho trường này.
+-- 13. Thêm trường Số đầu sách cho bảng nhà cung cấp, cập nhật tự động số đầu sách nhà cung cấp cung cấp cho cửa hàng
+-- 14. Thêm trường Số lượng sách và Tổng tiền hàng vào bảng nhà cung cấp, cập nhật dữ liệu cho trường này mỗi khi nhập hàng.
+-- 15.Tạo trigger trên bảng thoadonban thực hiện xóa các chi tiết hóa đơn mỗi khi xóa hóa đơn
