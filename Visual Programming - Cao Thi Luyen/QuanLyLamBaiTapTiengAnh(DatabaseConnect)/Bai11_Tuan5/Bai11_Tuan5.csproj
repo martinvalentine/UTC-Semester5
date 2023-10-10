@@ -109,5 +109,11 @@
       <Name>BELayer</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Files\BT1\Answers.txt" />
+    <EmbeddedResource Include="Files\BT1\Content.txt" />
+    <EmbeddedResource Include="Files\BT1\ContentAnswers.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -41,7 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BAL.cs" />
+    <Compile Include="HocSinhBAL.cs" />
+    <Compile Include="DangBaiTapBAL.cs" />
+    <Compile Include="PhieuDiemBAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

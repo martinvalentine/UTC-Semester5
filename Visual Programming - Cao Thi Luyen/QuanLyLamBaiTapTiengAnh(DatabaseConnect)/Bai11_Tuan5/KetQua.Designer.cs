@@ -30,10 +30,10 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.tbHoten = new System.Windows.Forms.TextBox();
+            this.tbMaHs = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.tbLop = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.tbTgianBatDau = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -74,19 +74,19 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Mã học sinh:";
             // 
-            // textBox1
+            // tbHoten
             // 
-            this.textBox1.Location = new System.Drawing.Point(116, 43);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(168, 24);
-            this.textBox1.TabIndex = 1;
+            this.tbHoten.Location = new System.Drawing.Point(116, 43);
+            this.tbHoten.Name = "tbHoten";
+            this.tbHoten.Size = new System.Drawing.Size(168, 24);
+            this.tbHoten.TabIndex = 1;
             // 
-            // textBox2
+            // tbMaHs
             // 
-            this.textBox2.Location = new System.Drawing.Point(116, 83);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(168, 24);
-            this.textBox2.TabIndex = 1;
+            this.tbMaHs.Location = new System.Drawing.Point(116, 83);
+            this.tbMaHs.Name = "tbMaHs";
+            this.tbMaHs.Size = new System.Drawing.Size(168, 24);
+            this.tbMaHs.TabIndex = 1;
             // 
             // label3
             // 
@@ -98,12 +98,12 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "Lớp:";
             // 
-            // textBox3
+            // tbLop
             // 
-            this.textBox3.Location = new System.Drawing.Point(116, 124);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(168, 24);
-            this.textBox3.TabIndex = 1;
+            this.tbLop.Location = new System.Drawing.Point(116, 124);
+            this.tbLop.Name = "tbLop";
+            this.tbLop.Size = new System.Drawing.Size(168, 24);
+            this.tbLop.TabIndex = 1;
             // 
             // label4
             // 
@@ -147,10 +147,10 @@
             this.groupBox1.Controls.Add(this.btnLuuKQ);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.tbHoten);
             this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.textBox3);
-            this.groupBox1.Controls.Add(this.textBox2);
+            this.groupBox1.Controls.Add(this.tbLop);
+            this.groupBox1.Controls.Add(this.tbMaHs);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(13, 13);
             this.groupBox1.Name = "groupBox1";
@@ -176,6 +176,7 @@
             this.btnLuuKQ.TabIndex = 2;
             this.btnLuuKQ.Text = "Lưu";
             this.btnLuuKQ.UseVisualStyleBackColor = true;
+            this.btnLuuKQ.Click += new System.EventHandler(this.btnLuuKQ_Click);
             // 
             // groupBox2
             // 
@@ -294,10 +295,10 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox tbHoten;
+        private System.Windows.Forms.TextBox tbMaHs;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox tbLop;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox tbTgianBatDau;
         private System.Windows.Forms.Label label5;

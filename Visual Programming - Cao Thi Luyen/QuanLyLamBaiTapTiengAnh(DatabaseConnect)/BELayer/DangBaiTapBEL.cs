@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace BELayer
 {
+
     public class DangBaiTapBEL
     {
         public string _dangbaitap;

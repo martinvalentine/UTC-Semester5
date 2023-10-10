@@ -80,7 +80,6 @@
             this.bài2ToolStripMenuItem.Name = "bài2ToolStripMenuItem";
             this.bài2ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.bài2ToolStripMenuItem.Text = "Bài 2";
-            this.bài2ToolStripMenuItem.Click += new System.EventHandler(this.bài2ToolStripMenuItem_Click);
             // 
             // dạngBàiToolStripMenuItem
             // 

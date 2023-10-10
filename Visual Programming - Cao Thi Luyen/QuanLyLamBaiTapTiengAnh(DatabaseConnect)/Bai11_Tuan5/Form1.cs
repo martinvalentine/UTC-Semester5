@@ -14,11 +14,6 @@ namespace Bai11_Tuan5
 {
     public partial class Form1 : Form
     {
-        public BAL baobj = new BAL();
-        public HocSinhBEL HSbeobj = new HocSinhBEL();
-        public DangBaiTapBEL DangBaiTapbeboj = new DangBaiTapBEL();
-        public PhieuDiemBEL PhieuDiembeobj = new PhieuDiemBEL();
-
         string cauHoi;
         string cauHoi_DapAn;
         DateTime tgianbatdau;

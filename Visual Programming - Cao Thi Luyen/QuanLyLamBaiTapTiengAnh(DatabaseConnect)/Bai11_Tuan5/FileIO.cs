@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Bai11_Tuan5
 {
@@ -13,9 +15,10 @@ namespace Bai11_Tuan5
         {
             string s = "";
 
-            StreamReader sr = new StreamReader(duongdan);
-            s = sr.ReadToEnd();
-            sr.Close();
+            Assembly asm = Assembly.GetExecutingAssembly();
+            StreamReader reader = new StreamReader(asm.GetManifestResourceStream(duongdan));
+            s = reader.ReadToEnd();
+            reader.Close();
 
             return s;
         }
@@ -25,8 +28,9 @@ namespace Bai11_Tuan5
             string dapan = "";
 
             List<string> ls = new List<string>();
-            StreamReader sr = new StreamReader(duongdan);
-            while((dapan = sr.ReadLine()) != null)
+            Assembly asm = Assembly.GetExecutingAssembly();
+            StreamReader reader = new StreamReader(asm.GetManifestResourceStream(duongdan));
+            while ((dapan = reader.ReadLine()) != null)
             {
                 ls.Add(dapan);
             }    
