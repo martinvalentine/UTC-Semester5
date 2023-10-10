@@ -144,7 +144,7 @@ CREATE PROCEDURE Cau7
 	@soxe NVARCHAR(255),
 	@namvantai INT,
 	@sotien MONEY OUTPUT
-	AS 
+AS 
 BEGIN
 	SELECT 
 		@sotien = SUM(LoTrinh.DonGia * ChiTietVanTai.SoLuongVT)
@@ -180,8 +180,13 @@ DECLARE @sl INT
 EXEC Cau8 '50', @sl OUTPUT
 PRINT 'So luong xe vuot qua trong tai la: ' + CONVERT(NVARCHAR(50), @sl)
 
--- ****************************************************************** --
+-- ******************************************************************
+-- ******************************************************************
+-- ******************************************************************
+-- ******************************************************************
+-- ******************************************************************
 -- Bài 2:QLNhanVien.sql
+
 USE QLNhanVien
 
 --1. Tạo hàm với đầu vào là năm, đầu ra là danh sách nhân viên sinh vào năm đó
@@ -286,19 +291,19 @@ RETURN
         SELECT
             tChiTietNhanVien.MaNV,
             CASE 
-                WHEN tChiTietNhanVien.MucDoCV LIKE 'A%' THEN CAST(10000000 AS bigint)
-                WHEN tChiTietNhanVien.MucDoCV LIKE 'B%' THEN CAST(8000000 AS bigint)
-                WHEN tChiTietNhanVien.MucDoCV LIKE 'C%' THEN CAST(5000000 AS bigint)
+                WHEN tChiTietNhanVien.MucDoCV LIKE 'A%' THEN 10000000 
+                WHEN tChiTietNhanVien.MucDoCV LIKE 'B%' THEN 8000000
+                WHEN tChiTietNhanVien.MucDoCV LIKE 'C%' THEN 5000000
             END AS Phucap
         FROM tChiTietNhanVien
     ),
     tThongTinBH AS (
         SELECT
             tChiTietNhanVien.MaNV,
-            CAST(1490000 * tChiTietNhanVien.HSLuong + tPhucap.Phucap AS bigint) AS Luong,
-            CAST(0.08 * (1490000 * tChiTietNhanVien.HSLuong + tPhucap.Phucap) AS bigint) AS BHXH,
-            CAST(0.015 * (1490000 * tChiTietNhanVien.HSLuong + tPhucap.Phucap) AS bigint) AS BHYT,
-            CAST(0.01 * (1490000 * tChiTietNhanVien.HSLuong + tPhucap.Phucap) AS bigint) AS BHTN
+            1490000 * tChiTietNhanVien.HSLuong + tPhucap.Phucap AS Luong,
+            0.08 * (1490000 * tChiTietNhanVien.HSLuong + tPhucap.Phucap) AS BHXH,
+            0.015 * (1490000 * tChiTietNhanVien.HSLuong + tPhucap.Phucap) AS BHYT,
+            0.01 * (1490000 * tChiTietNhanVien.HSLuong + tPhucap.Phucap) AS BHTN
         FROM tPhucap
         INNER JOIN tChiTietNhanVien ON tChiTietNhanVien.MaNV = tPhucap.MaNV
     ),
@@ -307,13 +312,13 @@ RETURN
             tChiTietNhanVien.MaNV,
             CASE
 				WHEN (tt.Luong - tt.BHXH - tt.BHYT - tt.BHTN - 11000000 - IsNull(tChiTietNhanVien.GTGC,0) * 4400000) < 0 THEN 0
-                WHEN (tt.Luong - tt.BHXH - tt.BHYT - tt.BHTN - 11000000 - IsNull(tChiTietNhanVien.GTGC,0) * 4400000) <= 5000000 THEN CAST((tt.Luong - tt.BHXH - tt.BHYT - tt.BHTN - 11000000 - IsNull(tChiTietNhanVien.GTGC,0) * 4400000) * 0.005 AS INT)
-                WHEN (tt.Luong - tt.BHXH - tt.BHYT - tt.BHTN - 11000000 - IsNull(tChiTietNhanVien.GTGC,0) * 4400000) <= 10000000 THEN CAST((tt.Luong - tt.BHXH - tt.BHYT - tt.BHTN - 11000000 - IsNull(tChiTietNhanVien.GTGC,0) * 4400000) * 0.1 - 250000 AS INT)
-                WHEN (tt.Luong - tt.BHXH - tt.BHYT - tt.BHTN - 11000000 - IsNull(tChiTietNhanVien.GTGC,0) * 4400000) <= 18000000 THEN CAST((tt.Luong - tt.BHXH - tt.BHYT - tt.BHTN - 11000000 - IsNull(tChiTietNhanVien.GTGC,0) * 4400000) * 0.15 - 750000 AS bigint)
-                WHEN (tt.Luong - tt.BHXH - tt.BHYT - tt.BHTN - 11000000 - IsNull(tChiTietNhanVien.GTGC,0) * 4400000) <= 32000000 THEN CAST((tt.Luong - tt.BHXH - tt.BHYT - tt.BHTN - 11000000 - IsNull(tChiTietNhanVien.GTGC,0) * 4400000) * 0.2 - 1650000 AS bigint)
-                WHEN (tt.Luong - tt.BHXH - tt.BHYT - tt.BHTN - 11000000 - IsNull(tChiTietNhanVien.GTGC,0) * 4400000) <= 52000000 THEN CAST((tt.Luong - tt.BHXH - tt.BHYT - tt.BHTN - 11000000 - IsNull(tChiTietNhanVien.GTGC,0) * 4400000) * 0.25 - 3250000 AS bigint)
-                WHEN (tt.Luong - tt.BHXH - tt.BHYT - tt.BHTN - 11000000 - IsNull(tChiTietNhanVien.GTGC,0) * 4400000) <= 80000000 THEN CAST((tt.Luong - tt.BHXH - tt.BHYT - tt.BHTN - 11000000 - IsNull(tChiTietNhanVien.GTGC,0) * 4400000) * 0.3 - 5850000 AS bigint)
-                ELSE CAST((tt.Luong - tt.BHXH - tt.BHYT - tt.BHTN - 11000000 - IsNull(tChiTietNhanVien.GTGC,0) * 4400000) * 0.35 - 9850000 AS bigint)
+                WHEN (tt.Luong - tt.BHXH - tt.BHYT - tt.BHTN - 11000000 - IsNull(tChiTietNhanVien.GTGC,0) * 4400000) <= 5000000 THEN (tt.Luong - tt.BHXH - tt.BHYT - tt.BHTN - 11000000 - IsNull(tChiTietNhanVien.GTGC,0) * 4400000) * 0.005
+                WHEN (tt.Luong - tt.BHXH - tt.BHYT - tt.BHTN - 11000000 - IsNull(tChiTietNhanVien.GTGC,0) * 4400000) <= 10000000 THEN (tt.Luong - tt.BHXH - tt.BHYT - tt.BHTN - 11000000 - IsNull(tChiTietNhanVien.GTGC,0) * 4400000) * 0.1 - 250000
+                WHEN (tt.Luong - tt.BHXH - tt.BHYT - tt.BHTN - 11000000 - IsNull(tChiTietNhanVien.GTGC,0) * 4400000) <= 18000000 THEN (tt.Luong - tt.BHXH - tt.BHYT - tt.BHTN - 11000000 - IsNull(tChiTietNhanVien.GTGC,0) * 4400000) * 0.15 - 750000
+                WHEN (tt.Luong - tt.BHXH - tt.BHYT - tt.BHTN - 11000000 - IsNull(tChiTietNhanVien.GTGC,0) * 4400000) <= 32000000 THEN (tt.Luong - tt.BHXH - tt.BHYT - tt.BHTN - 11000000 - IsNull(tChiTietNhanVien.GTGC,0) * 4400000) * 0.2 - 1650000
+                WHEN (tt.Luong - tt.BHXH - tt.BHYT - tt.BHTN - 11000000 - IsNull(tChiTietNhanVien.GTGC,0) * 4400000) <= 52000000 THEN (tt.Luong - tt.BHXH - tt.BHYT - tt.BHTN - 11000000 - IsNull(tChiTietNhanVien.GTGC,0) * 4400000) * 0.25 - 3250000
+                WHEN (tt.Luong - tt.BHXH - tt.BHYT - tt.BHTN - 11000000 - IsNull(tChiTietNhanVien.GTGC,0) * 4400000) <= 80000000 THEN (tt.Luong - tt.BHXH - tt.BHYT - tt.BHTN - 11000000 - IsNull(tChiTietNhanVien.GTGC,0) * 4400000) * 0.3 - 5850000
+                ELSE (tt.Luong - tt.BHXH - tt.BHYT - tt.BHTN - 11000000 - IsNull(tChiTietNhanVien.GTGC,0) * 4400000) * 0.35 - 9850000
             END AS ThueTNCN
         FROM tThongTinBH tt
         INNER JOIN tChiTietNhanVien ON tChiTietNhanVien.MaNV = tt.MaNV
@@ -336,4 +341,49 @@ RETURN
 SELECT * FROM Cau5_b2()
 
 --6. Tạo thủ tục có đầu vào là mã phòng, đầu ra là số nhân viên của phòng đó và tên trưởng phòng
---7. Tạo thủ tục có đầu vào là mã phòng, tháng, năm, đầu ra là số tiền lương của phòng đó
+CREATE PROCEDURE Cau6_b2
+(
+	@maphong NVARCHAR(40),	
+	@SLnhanVien INT OUTPUT,
+	@TenTP NVARCHAR(20) OUTPUT
+)
+AS
+BEGIN
+	SELECT 
+		@SLnhanVien = COUNT(tNhanVien.MaNV)
+	FROM 
+		tNhanVien
+	WHERE tNhanVien.MaPB = @maphong
+
+	SELECT 
+		@TenTP = tNhanVien.TEN
+	FROM
+		tNhanVien
+		INNER JOIN tPhongBan ON tPhongBan.MaPB = tNhanVien.MaPB
+	WHERE tPhongBan.MaPB = @maphong AND tPhongBan.TruongPhong = tNhanVien.MaNV
+END
+
+DECLARE @SL INT, @TEN NVARCHAR(50)
+EXEC Cau6_b2 'VP', @SL OUTPUT, @TEN OUTPUT
+PRINT 'So luong nhan vien cua phong ban do la: ' + CONVERT(NVARCHAR(50), @SL)
+PRINT 'Ten truong phong la: ' + CONVERT(NVARCHAR(50), @TEN)
+
+--7. Tạo thủ tục có đầu vào là mã phòng đầu ra là số tiền lương của phòng đó
+CREATE PROCEDURE Cau7_b2
+(
+	@maphong NVARCHAR(40),
+	@tongtien INT OUTPUT
+)
+AS
+BEGIN
+	SELECT 
+		@tongtien = SUM(Cau5_b2.Luong)
+	FROM 
+		tNhanVien
+		INNER JOIN Cau5_b2() ON Cau5_b2.MaNV = tNhanVien.MaNV
+	WHERE tNhanVien.MaPB = @maphong
+END
+
+DECLARE @Luong MONEY
+EXEC Cau7_b2 N'VP', @Luong OUTPUT
+PRINT N'Tiền lương của phòng ban: '+ CONVERT(NVARCHAR(20),@Luong)
