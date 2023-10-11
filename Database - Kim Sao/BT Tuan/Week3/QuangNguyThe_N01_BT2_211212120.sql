@@ -250,7 +250,7 @@ SELECT * FROM Cau3_b2('GD')
 
 --4. Tạo hàm đưa ra thông tin về nhân viên được tăng lương của ngày hôm nay (giả sử 3 năm lên lương 1 lần)
 GO
-ALTER FUNCTION Cau4_b2()
+CREATE FUNCTION Cau4_b2()
 RETURNS TABLE
 AS
 RETURN
@@ -269,6 +269,7 @@ RETURN
 		AND DAY(tNhanVien.NgayBD) = DAY(GETDATE())
 		AND MONTH(tNhanVien.NgayBD) = MONTH(GETDATE())
 )
+
 SELECT * FROM Cau4_b2()
 
 /*
@@ -282,7 +283,7 @@ Trong đó: TN= Lương - BHXH - BHYT - BHTN - 11tr (mức chịu thuế) - GTGC
 - Phụ cấp: Mức độ công việc là A thì phụ cấp 10tr, mức độ B là 8tr, mức độ C là 5tr
 - Thực lĩnh: Lương – (BHXH+BHYT+BHTN + Thuế TNCN)
 */
-ALTER FUNCTION Cau5_b2()
+CREATE FUNCTION Cau5_b2()
 RETURNS TABLE
 AS
 RETURN
