@@ -715,15 +715,14 @@ END
 -- 9. Tạo thủ tục có đầu vào là mã sách, năm, đầu ra số lượng sách nhập, số lượng sách bán trong năm đó
 -- 10. Tạo thủ tục có đầu vào là mã khách hàng, năm, đầu ra là số lượng sách đã mua và số lượng tiền tiêu dùng của khách hàng đó trong năm nhập vào.
 -- 11.Tạo thủ tục có đầu vào là mã khách hàng, năm, đầu ra là số lượng hóa đơn đã mua và số lượng tiền tiêu dùng của khách hàng đó trong năm đó.
-GO
-CREATE PROCEDURE Cau11
+alter PROCEDURE Cau11
 	@makh NVARCHAR(10),
 	@year INT,
 	@sl INT OUTPUT,
 	@money MONEY OUT
 AS BEGIN
-	SELECT DISTINCT 
-		@sl = COUNT (tChiTietHDB.SoHDB),
+	SELECT 
+		@sl = COUNT (DISTINCT tHoaDonBan.SoHDB),
 		@money = SUM (tSach.DonGiaBan* tChiTietHDB.SLBan)
 	FROM tChiTietHDB
 		INNER JOIN tHoaDonBan ON tHoaDonBan.SoHDB = tChiTietHDB.SoHDB
@@ -731,12 +730,13 @@ AS BEGIN
 	WHERE YEAR(tHoaDonBan.NgayBan) = @year
 		AND tHoaDonBan.MaKH = @makh
 END
+GO
 
 DECLARE @sach INT, @tien MONEY
 EXEC Cau11 'KH01','2014',@sach OUTPUT, @tien OUTPUT
 PRINT 'So luong hoa don da mua :' + CONVERT(NVARCHAR(50), @sach)
 PRINT 'Luong tien tieu dung:' + CONVERT(NVARCHAR(50), @tien)
-
+GO
 -- Hết --
 -- Hàm --
 -- 1. Tạo hàm đưa ra tổng số tiền đã nhập sách trong một năm với tham số đầu vào là năm
