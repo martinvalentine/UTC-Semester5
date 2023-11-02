@@ -101,10 +101,23 @@ GO
 --Từ login TranHuyHiep, phân quyền Select trên view Câu 4 cho PhamVietTrung
 GRANT SELECT ON CAU4_VIEW TO PhamVietTrung
 GO
---Câu 6: Tạo view đưa ra danh sách khách hàng có số tiền tiêu dùng nằm trong top(3) số tiền tiêu dùng lớn nhất tại khách sạn.
---Tiền tiêu dùng của khách là số tiền khách trả cho tiền thuê phòng tại khách sạn.
+
+-- Câu 6: Tạo view đưa ra danh sách khách hàng có số tiền tiêu dùng nằm trong top(3) số tiền tiêu dùng lớn nhất tại khách sạn.
+-- Tiền tiêu dùng của khách là số tiền khách trả cho tiền thuê phòng tại khách sạn.
+
 CREATE VIEW CAU6_VIEW
-AS 
-SELECT 
+AS
+SELECT TOP 3
+	KHACHHANG.TenKH,
 	KHACHHANG.MaKH,
-	KHACHHANG.TenKH
+	SUM(DATEDIFF(DAY, PHIEUTHUE.Thoigiancheckin, PHIEUTHUE.Thoigiancheckout) * LOAIPHONG.Dongiaphong - PHIEUDAT.Tiendatcoc) AS TIENTIEUDUNG
+FROM KHACHHANG 
+	INNER JOIN PHIEUDAT ON PHIEUDAT.MaKH = KHACHHANG.MaKH
+	INNER JOIN PHIEUTHUE ON PHIEUTHUE.MaBooking = PHIEUDAT.MaBooking
+	INNER JOIN PHONG ON PHONG.Maphong = PHIEUTHUE.Maphong
+	INNER JOIN LOAIPHONG ON LOAIPHONG.MaLP = PHONG.MaLP
+GROUP BY KHACHHANG.TenKH, KHACHHANG.MaKH
+ORDER BY TIENTIEUDUNG DESC
+GO
+
+
