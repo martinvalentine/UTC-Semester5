@@ -63,6 +63,51 @@ GO
 -- = 1, Thời gian checkin và checkout cùng 1 ngày
 -- = Thoigiancheckout − Thoigiancheckin, Trường hợp khác
 
+ALTER TABLE PHONG ADD SoNgayThue INT
+GO 
+
+CREATE TRIGGER CapNhatSoNgayThue ON PHIEUTHUE
+FOR INSERT, UPDATE, DELETE
+AS
+BEGIN
+    DECLARE @maphong NVARCHAR(20);
+    DECLARE @tgout DATETIME;
+    DECLARE @tgin DATETIME;
+
+    SELECT @maphong = maphong, @tgout = Thoigiancheckout, @tgin = Thoigiancheckin FROM inserted;
+
+    IF (@tgout = @tgin)
+    BEGIN
+        UPDATE PHONG
+        SET SoNgayThue = 1
+        WHERE PHONG.Maphong = @maphong;
+    END
+    ELSE 
+    BEGIN
+        UPDATE PHONG
+        SET SoNgayThue = DATEDIFF(DAY, @tgin, @tgout)
+        WHERE PHONG.Maphong = @maphong;
+    END
+END
+GO
+
+-- INSERT
+INSERT [dbo].[PHIEUTHUE] ([MaPT], [MaBooking], [ThoigianlapPT], [Thoigiancheckout], [Thoigiancheckin], [KMPhong], [Maphong]) VALUES (N'PT0025', N'PD0016', CAST(N'2022-01-09T00:00:00.000' AS DateTime), CAST(N'2022-01-12T00:00:00.000' AS DateTime), CAST(N'2022-01-12T00:00:00.000' AS DateTime), 0, N'P404')
+SELECT * FROM PHONG
+GO 
+
+-- UPDATE
+UPDATE [dbo].[PHIEUTHUE]
+SET [Thoigiancheckout] = CAST(N'2022-01-14T00:00:00.000' AS DateTime)
+WHERE [MaPT] = N'PT0025';
+SELECT * FROM PHONG
+GO
+
+-- DELETE
+DELETE FROM [dbo].[PHIEUTHUE]
+WHERE [MaPT] = N'PT0025';
+SELECT * FROM PHONG
+GO
 --Câu 4: Tạo View gồm các thông tin mã khách hàng, tên khách hàng, địa chỉ, điện thoại, mã Booking, tiền đặt cọc, mã loại phòng, số lượng phòng có ngày đến dự kiến từ ngày 12/12/2022 đến ngày 19/12/2022
 
 CREATE VIEW CAU4_VIEW
@@ -120,4 +165,6 @@ GROUP BY KHACHHANG.TenKH, KHACHHANG.MaKH
 ORDER BY TIENTIEUDUNG DESC
 GO
 
+SELECT * FROM CAU6_VIEW
+GO
 
