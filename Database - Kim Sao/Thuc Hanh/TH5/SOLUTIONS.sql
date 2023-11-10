@@ -57,10 +57,10 @@ SELECT * FROM CAU2_FUNC ('Standard01')
 GO
 
 --Câu 3: Thêm trường Số lượng phòng đặt vào bảng Phiếu đặt. Tạo Trigger cập nhật tự động cho trường này mỗi khi thêm, sửa, xóa một bản ghi ở bảng Chi tiết phòng đặt.
-ALTER TABLE PhieuDat ADD SL INT
+ALTER TABLE ALTER TABLE PHIEUDAT ADD SL INT
 GO
 
-CREATE OR ALTER TRIGGER CAU3_TRIGGER ON ChiTietPhongDat
+CREATE OR ALTER TRIGGER CAU3_TRIGGER ON CHITIETPHONGDAT
 AFTER INSERT, UPDATE, DELETE
 AS
 BEGIN
@@ -70,15 +70,25 @@ BEGIN
     -- Inserted
     SELECT @ma = MaBooking, @sluong = SLPhong FROM inserted
     UPDATE PHIEUDAT
-    SET ChiTietPhongDat.SL = ISNULL(ChiTietPhongDat.SL, 0) + @sluong
+    SET PHIEUDAT.SL = ISNULL(PHIEUDAT.SL, 0) + @sluong
     WHERE @ma = MaBooking
 
     -- Deleted
     SELECT @ma_de = MaBooking, @sluong_de = SLPhong FROM deleted
     UPDATE PHIEUDAT
-    SET ChiTietPhongDat.SL = ISNULL(ChiTietPhongDat.SL, 0) - @sluong_de
-    WHERE @ma_de = MaBooking
+    SET PHIEUDAT.SL = IIF((ISNULL(PHIEUDAT.SL, 0) - @sluong_de) < 0, 0, PHIEUDAT.SL - @sluong_de)
+    WHERE @ma_de = MaBooking 
 END
+GO
+
+INSERT [dbo].[CHITIETPHONGDAT] ([MaBooking], [SLPhong], [MaLP]) VALUES (N'PD0015', 2, N'Deluxe02')
+INSERT [dbo].[CHITIETPHONGDAT] ([MaBooking], [SLPhong], [MaLP]) VALUES (N'PD0015', 3, N'Standard02')
+INSERT [dbo].[CHITIETPHONGDAT] ([MaBooking], [SLPhong], [MaLP]) VALUES (N'PD0015', 4, N'Standard01')
+SELECT * FROM PHIEUDAT WHERE PHIEUDAT.MaBooking ='PD0015'
+GO
+
+DELETE CHITIETPHONGDAT WHERE MaBooking = 'PD0015' AND MaLP =  N'Deluxe02'
+SELECT * FROM PHIEUDAT WHERE PHIEUDAT.MaBooking ='PD0015'
 GO
 
 --Câu 4: Tạo View gồm các thông tin mã nhân viên, tên nhân viên, mã HDTT, Ngày lập HD, Ngày thanh toán, phương thức thanh toán, mã booking, ngày đến dự kiến, ngày đi dự kiến có ngày đến dự kiến từ ngày 12/12/2022 đến ngày 19/12/2022
@@ -141,3 +151,5 @@ ORDER BY SUM(LOAIPHONG.Dongiaphong* DATEDIFF(DAY, PHIEUTHUE.Thoigiancheckin,PHIE
 END
 GO
 
+EXEC CAU6_PROC 2020, 2022
+GO
