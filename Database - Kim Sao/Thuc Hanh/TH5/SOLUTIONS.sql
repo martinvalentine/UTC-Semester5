@@ -57,7 +57,29 @@ SELECT * FROM CAU2_FUNC ('Standard01')
 GO
 
 --Câu 3: Thêm trường Số lượng phòng đặt vào bảng Phiếu đặt. Tạo Trigger cập nhật tự động cho trường này mỗi khi thêm, sửa, xóa một bản ghi ở bảng Chi tiết phòng đặt.
+ALTER TABLE PhieuDat ADD SL INT
+GO
 
+CREATE OR ALTER TRIGGER CAU3_TRIGGER ON ChiTietPhongDat
+AFTER INSERT, UPDATE, DELETE
+AS
+BEGIN
+    DECLARE @ma NVARCHAR(10), @sluong INT
+    DECLARE @ma_de NVARCHAR(10), @sluong_de INT
+
+    -- Inserted
+    SELECT @ma = MaBooking, @sluong = SLPhong FROM inserted
+    UPDATE PHIEUDAT
+    SET ChiTietPhongDat.SL = ISNULL(ChiTietPhongDat.SL, 0) + @sluong
+    WHERE @ma = MaBooking
+
+    -- Deleted
+    SELECT @ma_de = MaBooking, @sluong_de = SLPhong FROM deleted
+    UPDATE PHIEUDAT
+    SET ChiTietPhongDat.SL = ISNULL(ChiTietPhongDat.SL, 0) - @sluong_de
+    WHERE @ma_de = MaBooking
+END
+GO
 
 --Câu 4: Tạo View gồm các thông tin mã nhân viên, tên nhân viên, mã HDTT, Ngày lập HD, Ngày thanh toán, phương thức thanh toán, mã booking, ngày đến dự kiến, ngày đi dự kiến có ngày đến dự kiến từ ngày 12/12/2022 đến ngày 19/12/2022
 CREATE OR ALTER VIEW CAU4_VIEW
@@ -97,25 +119,25 @@ grant select, update on PhieuDat to NguyenDucThuan
 GO
 --Câu 6: Tạo thủ tục có đầu vào là năm bắt đầu, năm kết thúc, đầu ra là ba tháng trong năm có tổng doanh thu cao nhất (ví dụ từ năm 2020 đến năm 2022 thì tháng 6, 7, 8 là những tháng có doanh thu cao nhất, tháng lấy theo ngày thanh toán).
 
---CREATE OR ALTER PROCEDURE CAU6_PROC
---(
---	@STARTYEAR INT,
---	@ENDYEAR INT
---)
---AS
---BEGIN
---	SELECT TOP 3
---END
-
-SELECT
+CREATE OR ALTER PROCEDURE CAU6_PROC
+(
+	@STARTYEAR INT,
+	@ENDYEAR INT
+)
+AS
+BEGIN
+SELECT TOP 3
 	MONTH(HOADONTT.NgayTT) AS THANG,
-	SUM(LOAIPHONG.Dongiaphong* DATEDIFF(DAY, PHIEUTHUE.Thoigiancheckin,PHIEUTHUE.Thoigiancheckout)) AS DOANHTHU
+	SUM(LOAIPHONG.Dongiaphong* DATEDIFF(DAY, PHIEUTHUE.Thoigiancheckin,PHIEUTHUE.Thoigiancheckout) * (1 - PHIEUTHUE.KMPhong)) AS DOANHTHU
 FROM 
 	PHIEUTHUE
 	INNER JOIN PHIEUDAT ON PHIEUDAT.MaBooking = PHIEUTHUE.MaBooking
 	INNER JOIN HOADONTT ON HOADONTT.MaBooking = PHIEUDAT.MaBooking
 	INNER JOIN PHONG ON PHONG.Maphong = PHIEUTHUE.Maphong
 	INNER JOIN LOAIPHONG ON LOAIPHONG.MaLP = PHONG.MaLP
-WHERE (YEAR(Thoigiancheckout) BETWEEN 2020 AND 2022)
+WHERE YEAR(HOADONTT.NgayTT) BETWEEN @STARTYEAR AND @ENDYEAR
 group by month(NgayTT)
-ORDER BY SUM(LOAIPHONG.Dongiaphong* DATEDIFF(DAY, PHIEUTHUE.Thoigiancheckin,PHIEUTHUE.Thoigiancheckout)) DESC
+ORDER BY SUM(LOAIPHONG.Dongiaphong* DATEDIFF(DAY, PHIEUTHUE.Thoigiancheckin,PHIEUTHUE.Thoigiancheckout) * (1 - PHIEUTHUE.KMPhong)) DESC
+END
+GO
+
