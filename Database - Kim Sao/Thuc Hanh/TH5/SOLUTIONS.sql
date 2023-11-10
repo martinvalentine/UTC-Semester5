@@ -57,7 +57,7 @@ SELECT * FROM CAU2_FUNC ('Standard01')
 GO
 
 --Câu 3: Thêm trường Số lượng phòng đặt vào bảng Phiếu đặt. Tạo Trigger cập nhật tự động cho trường này mỗi khi thêm, sửa, xóa một bản ghi ở bảng Chi tiết phòng đặt.
-ALTER TABLE ALTER TABLE PHIEUDAT ADD SL INT
+ALTER TABLE PHIEUDAT ADD SL INT
 GO
 
 CREATE OR ALTER TRIGGER CAU3_TRIGGER ON CHITIETPHONGDAT
