@@ -27,8 +27,7 @@ namespace NguyTheQuang_211212120.Controllers
         {
             if (maloaihang == null)
             {
-				var hanghoa = db.
-                    .Take(6).ToList();
+				var hanghoa = db.Products.Take(6).ToList();
 				return PartialView("HangHoaTheoLoai", hanghoa);
             }
             else
