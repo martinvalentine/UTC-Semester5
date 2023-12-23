@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Product>
+
+@foreach (var item in Model)
+{
+	<div class="col-xs-4 product-men">
+		<div class="men-pro-item">
+			<div class="men-thumb-item">
+				<img src="~/images/@item.Image" alt="@item.Name">
+			</div>
+			<div class="item-info-product ">
+				<h4>
+					<a href="single.html">@item.Image</a>
+				</h4>
+				<div class="info-product-price">
+					<span class="item_price">$@item.UnitPrice</span>
+				</div>
+				<div class="snipcart-details">
+					<a href="#" class="button">ADD TO CART</a>
+				</div>
+			</div>
+		</div>
+	</div>
+}
