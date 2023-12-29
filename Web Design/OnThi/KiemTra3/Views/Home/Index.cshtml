@@ -1,0 +1,66 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model IEnumerable<HangHoa>
+
+<partial name="NguyTheQuang_Body" model="Model" />
+
+@section Scripts {
+    <script>
+        // Phan loai
+        $("ul li a").on('click', function () {
+            var id = $(this).attr("id")
+            alert(id)
+            $.ajax({
+                url: "/Home/HangHoaTheoLoai",
+                data: { maloaihang: id },
+                success: function (res) {
+                    $("#contentView").html(res)
+                }
+            })
+        })
+
+        // Phan loai combobox
+        $(document).ready(function () {
+            $("#loaiHang").change(function () {
+                var id = $(this).val();
+                $.ajax({
+                    url: "/Home/LoaiHangSelect",
+                    data: { mid: id },
+                    success: function (response) {
+                        $("#contentView").html(response);
+                    }
+                });
+            });
+        });
+
+        // Tim Kiem
+        $("input#btnSearch").click(function (e) {
+            var keyword = $("#keyword").val();
+            var data = { keyword: keyword };
+            $.ajax({
+                url: "/Home/SearchByName",           //Đường dẫn gửi request
+                data: data,						//Tham số được gửi kèm request lên server
+                success: function (response) {		// callback function khi nhận response từ server
+                    $("#contentView").html(response);
+                }
+            });
+        });
+
+        // Phan trang
+        $('body').on('click', 'li.page-item', function (e) {
+            var page = $(this).attr("page");
+            var mid = $(this).attr("mid")
+            var data = { id: mid, pageIndex: page }
+            console.log(data)
+            $.ajax({
+                url: "/Home/Paging",
+                data: data,
+                success: function (res) {
+                    $("#contentView").html(res);
+                }
+            })
+        })
+
+    </script>
+}

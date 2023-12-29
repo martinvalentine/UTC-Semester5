@@ -1,0 +1,20 @@
+﻿@model IEnumerable<LoaiHang>
+
+<div style="display: flex; justify-content: center;">
+
+    <h4>Phân Loại</h4>
+
+    <select class="nav form-select" id="loaiHang">
+
+        <option value="">All</option>
+
+        @foreach (var m in Model)
+
+        {
+            <option value="@m.MaLoai">@m.TenLoai</option>
+        }
+
+    </select>
+
+</div>
+

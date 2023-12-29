@@ -1,0 +1,14 @@
+﻿
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model IEnumerable<LoaiHang>
+<ul>
+    <li class="active" id=null><a href="#">Ngụy Thế Quang</a></li>    
+    <li><a asp-action="Create">Tạo</a></li>
+    @foreach (var item in Model)
+    {
+        <li><a href="#" id="@item.MaLoai">@item.TenLoai</a></li>
+    }
+    <div class="clear"></div>
+</ul>
