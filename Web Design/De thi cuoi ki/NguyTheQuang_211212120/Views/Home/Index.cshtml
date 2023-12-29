@@ -1,0 +1,25 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model IEnumerable<Product>
+
+<partial name="NguyTheQuang_MainLeft" model="Model" />
+<partial name = "NguyTheQuang_MainRight" model="Model"/>
+
+
+@section Scripts {
+    <script>
+        // Phan loai
+        $("ul li a").on('click', function () {
+            var id = $(this).attr("id")
+            $.ajax({
+                url: "/Home/HangHoaTheoLoai",
+                data: { maloaihang: id },
+                success: function (res) {
+                    $("#contentHangHoaTheoLoai").html(res)
+                }
+            })
+        })
+
+    </script>
+}

@@ -1,0 +1,10 @@
+﻿@model IEnumerable<Provider>
+
+<ul class="nav navbar-nav menu__list">
+    @foreach (var item in Model)
+    {
+        <li>
+            <a class="nav-stylehead" href="#" id="@item.Id">@item.ProviderName</a>
+        </li>
+    }
+</ul>
